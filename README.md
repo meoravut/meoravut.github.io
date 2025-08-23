@@ -3,6 +3,8 @@
 ## הינה קישור שאפשר לשלוח:
 [https://meoravut.github.io](https://meoravut.github.io)
 
+## קישור לאנליטיקות (לא לשלוח):
+[אנליטיקות GoatCounter](https://meoravut.goatcounter.com/)
 
 ## הוראות תפעול
  בציק ליסט html (פתיחה בכרום להסתכל, כתבן או פנקס רשימות זה לעריכה) 
