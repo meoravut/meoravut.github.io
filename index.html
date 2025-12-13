@@ -1,260 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <title>צ'ק ליסט לרכז/ת </title>
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
 
-            *,
-            *::before,
-            *::after {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-size: 20px;
-            }
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-            body {
-                --color: rgba(30, 30, 30);
-                --bgColor: rgba(245, 245, 245);
-                min-height: 100vh;
-                margin: 0;
-                padding: 0;
-                font-family: "Poppins", "Tahoma", "Arial", sans-serif;
-                color: var(--color);
-                background: var(--bgColor);
-            }
+    <title>צ'ק ליסט לרכז/ת </title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
 
-            div.main {
-                --color: rgba(30, 30, 30);
-                --bgColor: rgba(245, 245, 245);
-                min-height: 100vh;
-                display: grid;
-                align-content: center;
-                gap: 2rem;
-                padding: 2rem;
-                font-family: "Poppins", "Tahoma", "Arial", sans-serif;
-                color: var(--color);
-                background: var(--bgColor);
-            }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
 
-            h1 {
-                text-align: center !important;
-                font-size: 36px;
-            }
+        body {
+            --color: rgba(30, 30, 30);
+            --bgColor: rgba(245, 245, 245);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", "Tahoma", "Arial", sans-serif;
+            color: var(--color);
+            background: var(--bgColor);
+        }
 
+        div.main {
+            --color: rgba(30, 30, 30);
+            --bgColor: rgba(245, 245, 245);
+            min-height: 100vh;
+            display: grid;
+            align-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            font-family: "Poppins", "Tahoma", "Arial", sans-serif;
+            color: var(--color);
+            background: var(--bgColor);
+        }
+
+        h1 {
+            text-align: center !important;
+            font-size: 36px;
+        }
+
+        ul {
+            --col-gap: 2rem;
+            --row-gap: 3rem;
+            --line-w: 0.2rem;
+            display: grid;
+            grid-template-columns: var(--line-w) 1fr;
+            grid-auto-columns: max-content;
+            column-gap: var(--col-gap);
+            list-style: none;
+            /* width: min(60rem, 90%); */
+            width: 100%;
+            margin-inline: auto;
+        }
+
+        /* line */
+        ul::before {
+            content: "";
+            grid-column: 1;
+            grid-row: 1 / span 20;
+            background: rgb(225, 225, 225);
+            border-radius: calc(var(--line-w) / 2);
+        }
+
+        /* columns*/
+
+        /* row gaps */
+        ul li:not(:last-child) {
+            margin-bottom: var(--row-gap);
+        }
+
+        /* card */
+        ul li {
+            grid-column: 2;
+            --inlineP: 1.5rem;
+            margin-inline: var(--inlineP);
+            grid-row: span 2;
+            display: grid;
+            grid-template-rows: auto auto auto;
+            direction: rtl;
+        }
+
+        /* date */
+        ul li .date {
+            direction: ltr;
+            --dateH: 3rem;
+            height: var(--dateH);
+            margin-inline: calc(var(--inlineP) * -1);
+
+            text-align: center;
+            background-color: var(--accent-color);
+
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+
+            display: grid;
+            place-content: center;
+            position: relative;
+
+            border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
+        }
+
+        /* date flap */
+        ul li .date::before {
+
+            content: "";
+            width: var(--inlineP);
+            aspect-ratio: 1;
+            background: var(--accent-color);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2) 100%, transparent);
+            position: absolute;
+            top: 100%;
+
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            right: 0;
+        }
+
+        /* circle */
+        ul li .date::after {
+            content: "";
+            position: absolute;
+            width: 2rem;
+            aspect-ratio: 1;
+            background: var(--bgColor);
+            border: 0.3rem solid var(--accent-color);
+            border-radius: 50%;
+            top: 50%;
+
+            transform: translate(50%, -50%);
+            right: calc(100% + var(--col-gap) + var(--line-w) / 2);
+        }
+
+        /* title descr */
+        ul li .title,
+        ul li .descr {
+            background: var(--bgColor);
+            position: relative;
+            padding-inline: 1.5rem;
+        }
+
+        ul li .title {
+            overflow: hidden;
+            padding-block-start: 1.5rem;
+            padding-block-end: 1rem;
+            font-weight: 500;
+        }
+
+        ul li .descr {
+            padding-block-end: 1.5rem;
+            font-weight: 300;
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* shadows */
+        ul li .title::before,
+        ul li .descr::before {
+            content: "";
+            position: absolute;
+            width: 90%;
+            height: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            left: 50%;
+            border-radius: 50%;
+            filter: blur(4px);
+            transform: translate(-50%, 50%);
+        }
+
+        ul li .title::before {
+            bottom: calc(100% + 0.125rem);
+        }
+
+        ul li .descr::before {
+            z-index: -1;
+            bottom: 0.25rem;
+        }
+
+        @media (min-width: 40rem) {
             ul {
-                --col-gap: 2rem;
-                --row-gap: 3rem;
-                --line-w: 0.2rem;
-                display: grid;
-                grid-template-columns: var(--line-w) 1fr;
-                grid-auto-columns: max-content;
-                column-gap: var(--col-gap);
-                list-style: none;
-                /* width: min(60rem, 90%); */
-                width: 100%;
-                margin-inline: auto;
+                grid-template-columns: 1fr var(--line-w) 1fr;
             }
 
-            /* line */
             ul::before {
-                content: "";
-                grid-column: 1;
-                grid-row: 1 / span 20;
-                background: rgb(225, 225, 225);
-                border-radius: calc(var(--line-w) / 2);
-            }
-
-            /* columns*/
-
-            /* row gaps */
-            ul li:not(:last-child) {
-                margin-bottom: var(--row-gap);
-            }
-
-            /* card */
-            ul li {
                 grid-column: 2;
-                --inlineP: 1.5rem;
-                margin-inline: var(--inlineP);
-                grid-row: span 2;
-                display: grid;
-                grid-template-rows: auto auto auto;
-                direction: rtl;
             }
 
-            /* date */
-            ul li .date {
-                direction: ltr;
-                --dateH: 3rem;
-                height: var(--dateH);
-                margin-inline: calc(var(--inlineP) * -1);
-
-                text-align: center;
-                background-color: var(--accent-color);
-
-                color: white;
-                font-size: 1.25rem;
-                font-weight: 700;
-
-                display: grid;
-                place-content: center;
-                position: relative;
-
-                border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
+            ul li:nth-child(odd) {
+                grid-column: 1;
             }
 
-            /* date flap */
-            ul li .date::before {
-
-                content: "";
-                width: var(--inlineP);
-                aspect-ratio: 1;
-                background: var(--accent-color);
-                background-image: linear-gradient(rgba(0, 0, 0, 0.2) 100%, transparent);
-                position: absolute;
-                top: 100%;
-
-                clip-path: polygon(0 0, 100% 0, 0 100%);
-                right: 0;
+            ul li:nth-child(even) {
+                grid-column: 3;
             }
 
-            /* circle */
-            ul li .date::after {
-                content: "";
-                position: absolute;
-                width: 2rem;
-                aspect-ratio: 1;
-                background: var(--bgColor);
-                border: 0.3rem solid var(--accent-color);
-                border-radius: 50%;
-                top: 50%;
-
-                transform: translate(50%, -50%);
-                right: calc(100% + var(--col-gap) + var(--line-w) / 2);
+            /* start second card */
+            ul li:nth-child(2) {
+                grid-row: 2/4;
             }
 
-            /* title descr */
-            ul li .title,
-            ul li .descr {
-                background: var(--bgColor);
-                position: relative;
-                padding-inline: 1.5rem;
+            ul li:nth-child(odd) .date::before {
+                clip-path: polygon(0 0, 100% 0, 100% 100%);
+                left: 0;
             }
 
-            ul li .title {
-                overflow: hidden;
-                padding-block-start: 1.5rem;
-                padding-block-end: 1rem;
-                font-weight: 500;
+            ul li:nth-child(odd) .date::after {
+                transform: translate(-50%, -50%);
+                left: calc(100% + var(--col-gap) + var(--line-w) / 2);
             }
 
-            ul li .descr {
-                padding-block-end: 1.5rem;
-                font-weight: 300;
-                direction: rtl;
-                text-align: right;
+            ul li:nth-child(odd) .date {
+                border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
             }
+        }
 
-            /* shadows */
-            ul li .title::before,
-            ul li .descr::before {
-                content: "";
-                position: absolute;
-                width: 90%;
-                height: 0.5rem;
-                background: rgba(0, 0, 0, 0.5);
-                left: 50%;
-                border-radius: 50%;
-                filter: blur(4px);
-                transform: translate(-50%, 50%);
-            }
+        div.descr,
+        h4,
+        .tabcontent,
+        h1 {
+            direction: rtl;
+            text-align: right;
+            white-space: pre-wrap;
+        }
 
-            ul li .title::before {
-                bottom: calc(100% + 0.125rem);
-            }
+        h4 {
+            font-weight: 400;
+        }
 
-            ul li .descr::before {
-                z-index: -1;
-                bottom: 0.25rem;
-            }
 
-            @media (min-width: 40rem) {
-                ul {
-                    grid-template-columns: 1fr var(--line-w) 1fr;
-                }
+        div.descr {
+            overflow-wrap: anywhere;
+            overflow: hidden;
+            word-wrap: break-word;
+            width: 100%;
+            height: auto;
+        }
 
-                ul::before {
-                    grid-column: 2;
-                }
+        /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_tabs */
 
-                ul li:nth-child(odd) {
-                    grid-column: 1;
-                }
-
-                ul li:nth-child(even) {
-                    grid-column: 3;
-                }
-
-                /* start second card */
-                ul li:nth-child(2) {
-                    grid-row: 2/4;
-                }
-
-                ul li:nth-child(odd) .date::before {
-                    clip-path: polygon(0 0, 100% 0, 100% 100%);
-                    left: 0;
-                }
-
-                ul li:nth-child(odd) .date::after {
-                    transform: translate(-50%, -50%);
-                    left: calc(100% + var(--col-gap) + var(--line-w) / 2);
-                }
-
-                ul li:nth-child(odd) .date {
-                    border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
-                }
-            }
-
-            div.descr,
-            h4,
-            .tabcontent,
-            h1 {
-                direction: rtl;
-                text-align: right;
-                white-space: pre-wrap;
-            }
-
-            h4 {
-                font-weight: 400;
-            }
-
-            
-            div.descr {
-                overflow-wrap: anywhere;
-                overflow: hidden;
-                word-wrap: break-word;
-                width: 100%;
-                height: auto;
-            }
-            /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_tabs */
-
-            /* Style the tab */
-            .tab {
+        /* Style the tab */
+        .tab {
             overflow: hidden;
             border: 1px solid #ccc;
             background-color: #f1f1f1;
             display: flex;
             justify-content: space-around;
             white-space-collapse: collapse;
-            }
+        }
 
-            /* Style the buttons inside the tab */
-            .tab button {
+        /* Style the buttons inside the tab */
+        .tab button {
             background-color: inherit;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             float: left;
             border: none;
             outline: none;
@@ -265,361 +268,457 @@
             min-width: 20%;
             color: inherit;
             font-weight: bold;
-            }
+        }
 
-            /* Change background color of buttons on hover */
-            .tab button:hover {
+        /* Change background color of buttons on hover */
+        .tab button:hover {
             background-color: #cfaeee;
-            }
+        }
 
-            /* Create an active/current tablink class */
-            .tab button.active {
+        /* Create an active/current tablink class */
+        .tab button.active {
             background-color: #9234eb;
             color: white;
-            }
+        }
 
-            /* Style the tab content */
-            .tabcontent {
+        /* Style the tab content */
+        .tabcontent {
             display: none;
             padding: 6px 12px;
             border: 1px solid #ccc;
             flex-direction: column;
-            }
+        }
 
-            .tabcontent h3 {
-                text-align: center;
-            }
+        .tabcontent h3 {
+            text-align: center;
+        }
 
-            b {
-                font-weight: bold !important;
-            }
-        </style>
-    </head>
+        b {
+            font-weight: bold !important;
+        }
+    </style>
+</head>
 
 <body data-new-gr-c-s-check-loaded="14.1123.0" data-gr-ext-installed="">
-<!-- Site entrance analytics, visit https://meoravut.goatcounter.com to see results -->
+    <!-- Site entrance analytics, visit https://meoravut.goatcounter.com to see results -->
     <script data-goatcounter="https://meoravut.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<div class="main">   
-<img src="logo.png">
+    <div class="main">
+        <img src="logo.png">
 
-<h1 dir="rtl">התפתחות אישית ומעורבות  חברתית  
-צ'ק ליסט לרכז/ת המעורבות - מחוז תל־אביב</h1>
-  <h2 dir="rtl" style="text-align: center; font-size: 130%; padding-top: -30px;" > שנת תשפ"ו</h2>
-<h4>
-ברוכים/ות הבאים/ות לשנה"ל תשפ"ו רכזי ורכזות המעורבות החברתית במחוז תל אביב.
-אחת ממטרות החינוך היא: "לטפח מעורבות בחיי החברה הישראלית, נכונות לקבל תפקידים ולמלאם מתוך מסירות ואחריות, רצון לעזרה הדדית, תרומה לקהילה, התנדבות וחתירה לצדק חברתי במדינת ישראל" (חוק החינוך הממלכתי התשס"ד, 2003). בעת הזו הינה צורך השעה והחברה. 
-<b>מטרת התוכנית</b>: טיפוח בוגר עצמאי, בעל תודעה, רגישות חברתית וחוסן נפשי, אכפתי ואחראי הרואה במעורבות חברתית ערך ודרך חיים.
+        <h1 dir="rtl">התפתחות אישית ומעורבות חברתית
+            צ'ק ליסט לרכז/ת המעורבות - מחוז תל־אביב</h1>
+        <h2 dir="rtl" style="text-align: center; font-size: 130%; padding-top: -30px;"> שנת תשפ"ו</h2>
+        <h4>
+            ברוכים/ות הבאים/ות לשנה"ל תשפ"ו רכזי ורכזות המעורבות החברתית במחוז תל אביב.
+            אחת ממטרות החינוך היא: "לטפח מעורבות בחיי החברה הישראלית, נכונות לקבל תפקידים ולמלאם מתוך מסירות ואחריות,
+            רצון לעזרה הדדית, תרומה לקהילה, התנדבות וחתירה לצדק חברתי במדינת ישראל" (חוק החינוך הממלכתי התשס"ד, 2003).
+            בעת הזו הינה צורך השעה והחברה.
+            <b>מטרת התוכנית</b>: טיפוח בוגר עצמאי, בעל תודעה, רגישות חברתית וחוסן נפשי, אכפתי ואחראי הרואה במעורבות
+            חברתית ערך ודרך חיים.
 
-לרשותכם/ן רשימת משימות וחומרי עזר בדגש על יישום התוכנית בתוך בית הספר וכשפה אחידה במחוז.
-<a href="https://docs.google.com/document/d/1selj8dxAZWTqIrvoZVcXDJ1506tD73mw/edit?usp=sharing&amp;ouid=118135712597895605881&amp;rtpof=true&amp;sd=true">תיק רכז </a> - חומרים כדוגמת טפסים (החתמת הורים, ועדות פטור), טבלת שעות, היגדים לתעודה ועוד.
-<a href="https://drive.google.com/file/d/1WVQQwtOURgh1YvELItw1kdJjbwp0CWwj/view?usp=sharing">תיק ממ"צ</a> להובלת מנהיגות הנוער בתחום המעורבות החברתית (כולל רציונאל, מערכי שיעור, טפסים ועוד)
-<a href="https://drive.google.com/file/d/1IuCgggeB01vf0farGcB-TUeYjAisto_v/view?usp=sharing">מצגת חנ"מ </a> - מעורבות חברתית בחינוך המיוחד.
+            לרשותכם/ן רשימת משימות וחומרי עזר בדגש על יישום התוכנית בתוך בית הספר וכשפה אחידה במחוז.
+            <a
+                href="https://docs.google.com/document/d/1selj8dxAZWTqIrvoZVcXDJ1506tD73mw/edit?usp=sharing&amp;ouid=118135712597895605881&amp;rtpof=true&amp;sd=true">תיק
+                רכז </a> - חומרים כדוגמת טפסים (החתמת הורים, ועדות פטור), טבלת שעות, היגדים לתעודה ועוד.
+            <a href="https://drive.google.com/file/d/1WVQQwtOURgh1YvELItw1kdJjbwp0CWwj/view?usp=sharing">תיק ממ"צ</a>
+            להובלת מנהיגות הנוער בתחום המעורבות החברתית (כולל רציונאל, מערכי שיעור, טפסים ועוד)
+            <a href="https://drive.google.com/file/d/1IuCgggeB01vf0farGcB-TUeYjAisto_v/view?usp=sharing">מצגת חנ"מ </a>
+            - מעורבות חברתית בחינוך המיוחד.
 
-על מנת להוביל את התוכנית בצורה מיטבית יש להיכנס אחת לחודש לישיבות מחנכים בשכבות השונות, לעדכן במידע על סטטוס הפעילות של התלמידים וכן, להנחות (מודלניג) למערכי שיעורי חינוך העוסקים במעורבות ויזמות חברתית.
-מאגרים ופעילויות תמצאו ב<a href="https://view.genial.ly/635ed72eac74e900112f28df">תוכנית ליבה חברתית לשעת חינוך</a>   
+            על מנת להוביל את התוכנית בצורה מיטבית יש להיכנס אחת לחודש לישיבות מחנכים בשכבות השונות, לעדכן במידע על סטטוס
+            הפעילות של התלמידים וכן, להנחות (מודלניג) למערכי שיעורי חינוך העוסקים במעורבות ויזמות חברתית.
+            מאגרים ופעילויות תמצאו ב<a href="https://view.genial.ly/635ed72eac74e900112f28df">תוכנית ליבה חברתית לשעת
+                חינוך</a>
 
-<div style="float: right; width: 80vw; margin: 50px;">
-
-  
-</div>
-</h4>
-<ul>
-
-    <li style="--accent-color:#068a29; grid-row: none">
-        <div class="date">חוזרי מנכ"ל ונהלים</div>
-        <div class="descr" style="text-align: center;">
-            <ol style="margin-top: -80px;">
-                <li style="margin: 5px"><a href="https://apps.education.gov.il/mankal/horaa.aspx?siduri=81">חוזר מנכ"ל - תוכנית התפתחות אישית ומעורבות חברתית  </a></li>
-                <li style="margin: 5px"><a href="https://apps.education.gov.il/Mankal/horaa.aspx?siduri=350">חוזר מנכ"ל - נוהל הסדרה  </a></li>
-            <li style="margin: 5px"><a href="https://drive.google.com/file/d/1cOAAByh6QBwXMfS__5YIMKG-cZGXDbn8/view?usp=sharing">עדכון נוהל 12 הפעלת תלמידים ונוער מתנדב בשעת חירום – הוראת השעה </a></li>
-            <li style="margin: 5px"><a href="https://drive.google.com/file/d/10NxNzU-IhFRdgdY972nFMtaD7FJJMnOd/view?usp=sharing">הנחיות והתאמות במעורבות - חרבות ברזל תשפ"ד</a></li>
-            <li style="margin: 5px"><a href="https://drive.google.com/file/d/1Nl8HdjOsSaSTyr-HHfkWEMvFYOOEZsLb/view?usp=sharing">הנחיות והתאמות במעורבות - חרבות ברזל תשפ"ה</a></li>
-                                  <li style="margin: 5px"><a href="https://drive.google.com/file/d/1l7UsyxKnn4a8Ckxp_eqeerG9o74pl0pp/view?usp=sharing">חוזר מנכ"ל - שילוב מעורבות חברתית במגמות הטכנולוגיות</a></li>
-        </ol>
-              </div>
-        </li>
-
-<li style="--accent-color:#41516C">
-<div class="date">לקראת פתיחת שנה וימי היערכות</div>
-<div class="descr">
-&#x2714;פגישה עם מנהל/ת - תיאום ציפיות
-&#x2714;ישיבה עם צוות החינוך החברתי ומול לוח תכנון אירועים לשנת הלימודים הבאה
-&#x2714;הזמנת הרצאות, הצגות, סדנאות ועוד (ישנם שני סלים בגפ"ן)
-1. מענים חברתיים קהילתיים
-2. מנהיגות ומעורבות בלמידה - תת סל של מענים פדגוגיים
-&#x2714;פגישה עם מנהל.ת ההתנדבות ברשות ומפקחת רשותית
-&#x2714;בקשה להקצאת זמן ביום ההיערכות עבור חשיפת התכנית לצוות
-&#x2714;פגישות עם מורים מקצועיים - לשילוב בתחומי הדעת
-&#x2714;פגישה עם הרכז/ת הפדגוגי/ת
-<strong>*</strong>לשים לב שבמערכת השעות מוקצות שעות כניסה לישיבות צוותי חינוך בשכבות י'- י"ב ולפורום רשותי על פי המועדים שיפורסמו.
-<strong>*</strong>הכנת מפגשי החשיפה של צוות בית הספר (בימי ההערכות/ישיבות מחנכים) למהות ומבנה התוכנית - מטרות ורציונאל.  
-
-<hr>
-&#x2714;קביעת מועד והכנת תהליך החשיפה לתוכנית עבור התלמידים  (בשיתוף ממצ"ים/תלמידים מובילים משכבה י"א) 
-יש לכלול שיעורי חינוך (היכרות דרך החוזקות, יריד בחירת מקום התנסות, טריביו, הטרדות מיניות, בטיחות ובטחון אישי במקום ההתנסות)
-<a href="https://drive.google.com/file/d/1VHEC1J1FiIzgBzf3x2Sj82m_EOt-cm_E/view?usp=sharing">סרטון מצטייני תשפ"ה מקוצר לחשיפת התוכנית לתלמידים</a>
-
-&#x2714;סטטוס המצב הקיים בכל שכבה: כמה תלמידים סיימו, כמה תלמידים צריכים להשלים את הדרישות משנה קודמת - חשוב ביותר!
-&#x2714;לכל תלמיד שעולה לכיתה י' מומלץ לשלוח שאלון מיפוי יכולות/<b>חוזקות ותחומי עניין</b> :(דוגמות לשאלונים ניתן למצוא בחודש ספטמבר)
-&#x2714;לבדוק עם רכזת המעורבות בשכבה ט' לגבי תלמידים מובילים בתחום ולגייסם כשותפים (ממ"צים)
-&#x2714;כניסה לישיבות מחנכים וביצוע מודלינג לשיעורי חינוך לפתיחת התוכנית: תוכנית ליבה חברתית לשעת חינוך (מאגר פעילויות בראשית העמוד).
-&#x2714;הסדרת ובדיקת מקומות ההתנסות שפתוחים לתלמידים במערכת הטריביו ומאושרים לשנת הלימודים <b>תשפ"ו </b> בכפוף לחוזר מנכ"ל נוהל הסדרה.
-&#x2714;בניית תהליך החשיפה לתוכנית ותיאום מקומות ההתנסות ליריד בחירת מקום התנסות - בשיתוף מנהל התנדבות רשותי
-<a href="https://noar.education.gov.il/personal-development/receptive-organizations/">גופים קולטים מאושרים ארצי </a> - יש לוודא מול מנהל התנדבות רשותי 
-
-<a href="https://docs.google.com/presentation/d/1zYOe9ApU4l7BHQLEkVfr7NAnoO-vUwUR/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true"> טריביו - מצגת הדרכה לרכז/ת
-</a>
-<a href="youtube.com/watch?v=TwKggTah6qQ&feature=youtu.be">סרטון הדרכה לרכז - מערכת טריביו</a>
-</div>
-</li>
-
-<li style="--accent-color:#FBCA3E">
-<div class="date">ספטמבר</div>
-<div class="descr">
-&#x2714;טרם יציאה להתנסות יש לקבוע שיעורי חינוך בכיתות לאיתור חוזקות, הכשרת לבבות לתוכנית, איך לבחור את מקום ההתנסות שלי, הטרדות מיניות ועוד - קישור למאגר בתחילת העמוד. 
-&#x2714;ניתן להעזר בשאלון מיפוי חוזקות ומערכים נוספים.   
-דוגמא 1 לשאלון מיפוי חוזקות וכישורים <a href="https://forms.gle/CsncDvvtGmcsANta9">https://forms.gle/egFfBhxQJvJSAS3x8</a>
-דוגמא 2 לשאלון מיפוי חוזקות וכישורים <a href="https://forms.gle/CsncDvvtGmcsANta9">https://docs.google.com/forms/d/11SYoQrQqcVcJR1mjtdeYGuqd2epsEyf2kgpzCuTc0gQ/edit</a>
-&#x2714;היכרות והצגת רכז/ת המעורבות בכל כיתה.
-
-<a href="https://docs.google.com/document/d/1pgrnj57Ezs3wF0ZT2FnUs4ZOLqHorp0e/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true" >הסבר טריביו סגירת תשפ"ה</a>
-&#x2714;לוודא אישור שעות של תלמידים משנת תשפ"ה  <span style="background-color: yellow;"> לא יאוחר מ10/9/25 </span>
-&#x2714;הורדת אפליקציית הטריביו על ידי התלמידים (שיבוץ למקום התנסות החל מ18/09/25)) <br> בין התאריכים 11-17/9/2025 מערכת הטריביו סגורה לצורך מעבר שנה, ב18/9/2025 המערכת תפתח לשנת תשפ"ו
-&#x2714;החל מ19/09/25  הגדרת בעלי הרשאה בטריביו (ממ"צ, מנהלי מקומות התנסות - לא לכל אחד ולא באופן אוטומטי).
-
-<u>סרטון הדרכה לתלמידים
-    
-</u><iframe src="https://www.youtube.com/embed/WXrVOZqC6xk" width="500" height="345" style="border: none">
-</iframe>
-<hr>
-&#x2714;אסיפת ההורים - הסבר על התוכנית
-&#x2714;חתימת ההורים על דף ידוע על התוכנית כתנאי סף לקבלת תעודת בגרות (דוגמה בתיק רכז)
-&#x2714;שיעורי חינוך בנושא: נתינה, מעורבות וערבות הדדית 
-&#x2714;מיפוי מצב מספר תלמידים שסיימו , תלמידים שלא השלימו חובותיהם
-&#x2714;הכנת תיקי תלמיד
-
-</div>
-</li>
-<li style="--accent-color:#E24A68">
-<div class="date">אוקטובר</div>
-<div class="descr">&#x2714; סוף אוקטובר/נובמבר יריד בחירת מקומות ההתנסות - מומלץ להיעזר בממ"צים של שכבה י"א.
-    &#x2714; הורדת אפליקציית טריביו על ידי התלמידים (שכבה י')
-    &#x2714; הצטרפות ובחירת מקום התנסות על ידי התלמידים <b><u>(כל השכבות!!!)</u></b>
-    &#x2714; בחירת ממ"צים מכל כיתה (בשיתוף המחנכים - מידע בתיק ממ"צ בראש העמוד)
-    &#x2714; מפגש ממ"צים ראשון - ומכאן מתחילה סדירות של מפגשים וליווי עד סוף שנה
-</div>
-</li>
-<li style="--accent-color:#1B5F8C">
-<div class="date">נובמבר</div>
-<div class="descr">
-    &#x2714; תוכנית עבודה מבוססת נתונים - מיפוי נתוני סטטוס בכל השכבות.
-    &#x2714; מעקב אחר הצטרפות תלמידים למקומות ההתנסות.
-    &#x2714; אחת לחודש להוציא דוחות עדכניים של הטריביו ולעקוב אחר שעות מדווחות של התלמידים שכולן שעות מאושרות
-&#x2714; שילוב מעורבות בתחומי הדעת - רכז פדגוגי 
-&#x2714; הנחייה וביצוע מערכי שיעור בנושאים הרלוונטיים - התחלת תהליכי איתור צרכים ועידוד ליזמות חברתית.
-&#x2714; ועדה בית ספרית - איתור ומילוי המלצה על תלמיד י"ב מצטיין מחוזי על שם אלעד ריבן ז"ל (מילוי הטופס שישלח על ידי מפקחת רשותית)
+            <div style="float: right; width: 80vw; margin: 50px;">
 
 
-</div>
-</li>
-<li style="--accent-color:#4CADAD">
-<div class="date">דצמבר</div>
-<div class="descr">
-    &#x2714; מילוי סטטוס מטה: לוודא שהמנהל/ת רואים את הנתונים טרם שליחתם 
-    &#x2714; לוודא שכל התלמידים מחוברים לאפליקציית הטריביו
-    &#x2714; מערכי שיעור בנושא זיהוי כוחות - כיצד יכולות באות לידי ביטוי בפעילות במקום ההתנסות, יוזמות חברתיות - תהליך חקר, מיפוי צרכים, העלאת פתרונות 
-    &#x2714; מעקב אחר תלמידים - דרך הטריביו - לוודא שכל השעות המדווחות על ידי התלמידים מאושרות ע"י מנהל מקום ההתנסות.
-    &#x2714; פרסום העשייה החברתית בבית הספר.
-    &#x2714; איתור יוזמה מצטיינת לתחרות המחוזית - בתיאום מפקחת רשותית ומנהל התנדבות רשותי.
+            </div>
+        </h4>
+        <ul>
+
+            <li style="--accent-color:#068a29; grid-row: none">
+                <div class="date">חוזרי מנכ"ל ונהלים</div>
+                <div class="descr" style="text-align: center;">
+                    <ol style="margin-top: -80px;">
+                        <li style="margin: 5px"><a href="https://apps.education.gov.il/mankal/horaa.aspx?siduri=81">חוזר
+                                מנכ"ל - תוכנית התפתחות אישית ומעורבות חברתית </a></li>
+                        <li style="margin: 5px"><a
+                                href="https://apps.education.gov.il/Mankal/horaa.aspx?siduri=350">חוזר מנכ"ל - נוהל
+                                הסדרה </a></li>
+                        <li style="margin: 5px"><a
+                                href="https://drive.google.com/file/d/1cOAAByh6QBwXMfS__5YIMKG-cZGXDbn8/view?usp=sharing">עדכון
+                                נוהל 12 הפעלת תלמידים ונוער מתנדב בשעת חירום – הוראת השעה </a></li>
+                        <li style="margin: 5px"><a
+                                href="https://drive.google.com/file/d/10NxNzU-IhFRdgdY972nFMtaD7FJJMnOd/view?usp=sharing">הנחיות
+                                והתאמות במעורבות - חרבות ברזל תשפ"ד</a></li>
+                        <li style="margin: 5px"><a
+                                href="https://drive.google.com/file/d/1Nl8HdjOsSaSTyr-HHfkWEMvFYOOEZsLb/view?usp=sharing">הנחיות
+                                והתאמות במעורבות - חרבות ברזל תשפ"ה</a></li>
+                        <li style="margin: 5px"><a
+                                href="https://drive.google.com/file/d/1l7UsyxKnn4a8Ckxp_eqeerG9o74pl0pp/view?usp=sharing">חוזר
+                                מנכ"ל - שילוב מעורבות חברתית במגמות הטכנולוגיות</a></li>
+                    </ol>
+                </div>
+            </li>
+
+            <li style="--accent-color:#41516C">
+                <div class="date">לקראת פתיחת שנה וימי היערכות</div>
+                <div class="descr">
+                    &#x2714;פגישה עם מנהל/ת - תיאום ציפיות
+                    &#x2714;ישיבה עם צוות החינוך החברתי ומול לוח תכנון אירועים לשנת הלימודים הבאה
+                    &#x2714;הזמנת הרצאות, הצגות, סדנאות ועוד (ישנם שני סלים בגפ"ן)
+                    1. מענים חברתיים קהילתיים
+                    2. מנהיגות ומעורבות בלמידה - תת סל של מענים פדגוגיים
+                    &#x2714;פגישה עם מנהל.ת ההתנדבות ברשות ומפקחת רשותית
+                    &#x2714;בקשה להקצאת זמן ביום ההיערכות עבור חשיפת התכנית לצוות
+                    &#x2714;פגישות עם מורים מקצועיים - לשילוב בתחומי הדעת
+                    &#x2714;פגישה עם הרכז/ת הפדגוגי/ת
+                    <strong>*</strong>לשים לב שבמערכת השעות מוקצות שעות כניסה לישיבות צוותי חינוך בשכבות י'- י"ב ולפורום
+                    רשותי על פי המועדים שיפורסמו.
+                    <strong>*</strong>הכנת מפגשי החשיפה של צוות בית הספר (בימי ההערכות/ישיבות מחנכים) למהות ומבנה
+                    התוכנית - מטרות ורציונאל.
+
+                    <hr>
+                    &#x2714;קביעת מועד והכנת תהליך החשיפה לתוכנית עבור התלמידים (בשיתוף ממצ"ים/תלמידים מובילים משכבה
+                    י"א)
+                    יש לכלול שיעורי חינוך (היכרות דרך החוזקות, יריד בחירת מקום התנסות, טריביו, הטרדות מיניות, בטיחות
+                    ובטחון אישי במקום ההתנסות)
+                    <a href="https://drive.google.com/file/d/1VHEC1J1FiIzgBzf3x2Sj82m_EOt-cm_E/view?usp=sharing">סרטון
+                        מצטייני תשפ"ה מקוצר לחשיפת התוכנית לתלמידים</a>
+
+                    &#x2714;סטטוס המצב הקיים בכל שכבה: כמה תלמידים סיימו, כמה תלמידים צריכים להשלים את הדרישות משנה
+                    קודמת - חשוב ביותר!
+                    &#x2714;לכל תלמיד שעולה לכיתה י' מומלץ לשלוח שאלון מיפוי יכולות/<b>חוזקות ותחומי עניין</b> :(דוגמות
+                    לשאלונים ניתן למצוא בחודש ספטמבר)
+                    &#x2714;לבדוק עם רכזת המעורבות בשכבה ט' לגבי תלמידים מובילים בתחום ולגייסם כשותפים (ממ"צים)
+                    &#x2714;כניסה לישיבות מחנכים וביצוע מודלינג לשיעורי חינוך לפתיחת התוכנית: תוכנית ליבה חברתית לשעת
+                    חינוך (מאגר פעילויות בראשית העמוד).
+                    &#x2714;הסדרת ובדיקת מקומות ההתנסות שפתוחים לתלמידים במערכת הטריביו ומאושרים לשנת הלימודים <b>תשפ"ו
+                    </b> בכפוף לחוזר מנכ"ל נוהל הסדרה.
+                    &#x2714;בניית תהליך החשיפה לתוכנית ותיאום מקומות ההתנסות ליריד בחירת מקום התנסות - בשיתוף מנהל
+                    התנדבות רשותי
+                    <a href="https://noar.education.gov.il/personal-development/receptive-organizations/">גופים קולטים
+                        מאושרים ארצי </a> - יש לוודא מול מנהל התנדבות רשותי
+
+                    <a
+                        href="https://docs.google.com/presentation/d/1zYOe9ApU4l7BHQLEkVfr7NAnoO-vUwUR/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">
+                        טריביו - מצגת הדרכה לרכז/ת
+                    </a>
+                    <a href="youtube.com/watch?v=TwKggTah6qQ&feature=youtu.be">סרטון הדרכה לרכז - מערכת טריביו</a>
+                </div>
+            </li>
+
+            <li style="--accent-color:#FBCA3E">
+                <div class="date">ספטמבר</div>
+                <div class="descr">
+                    &#x2714;טרם יציאה להתנסות יש לקבוע שיעורי חינוך בכיתות לאיתור חוזקות, הכשרת לבבות לתוכנית, איך לבחור
+                    את מקום ההתנסות שלי, הטרדות מיניות ועוד - קישור למאגר בתחילת העמוד.
+                    &#x2714;ניתן להעזר בשאלון מיפוי חוזקות ומערכים נוספים.
+                    דוגמא 1 לשאלון מיפוי חוזקות וכישורים <a
+                        href="https://forms.gle/CsncDvvtGmcsANta9">https://forms.gle/egFfBhxQJvJSAS3x8</a>
+                    דוגמא 2 לשאלון מיפוי חוזקות וכישורים <a
+                        href="https://forms.gle/CsncDvvtGmcsANta9">https://docs.google.com/forms/d/11SYoQrQqcVcJR1mjtdeYGuqd2epsEyf2kgpzCuTc0gQ/edit</a>
+                    &#x2714;היכרות והצגת רכז/ת המעורבות בכל כיתה.
+
+                    <a
+                        href="https://docs.google.com/document/d/1pgrnj57Ezs3wF0ZT2FnUs4ZOLqHorp0e/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הסבר
+                        טריביו סגירת תשפ"ה</a>
+                    &#x2714;לוודא אישור שעות של תלמידים משנת תשפ"ה <span style="background-color: yellow;"> לא יאוחר
+                        מ10/9/25 </span>
+                    &#x2714;הורדת אפליקציית הטריביו על ידי התלמידים (שיבוץ למקום התנסות החל מ18/09/25)) <br> בין
+                    התאריכים 11-17/9/2025 מערכת הטריביו סגורה לצורך מעבר שנה, ב18/9/2025 המערכת תפתח לשנת תשפ"ו
+                    &#x2714;החל מ19/09/25 הגדרת בעלי הרשאה בטריביו (ממ"צ, מנהלי מקומות התנסות - לא לכל אחד ולא באופן
+                    אוטומטי).
+
+                    <u>סרטון הדרכה לתלמידים
+
+                    </u><iframe src="https://www.youtube.com/embed/WXrVOZqC6xk" width="500" height="345"
+                        style="border: none">
+                    </iframe>
+                    <hr>
+                    &#x2714;אסיפת ההורים - הסבר על התוכנית
+                    &#x2714;חתימת ההורים על דף ידוע על התוכנית כתנאי סף לקבלת תעודת בגרות (דוגמה בתיק רכז)
+                    &#x2714;שיעורי חינוך בנושא: נתינה, מעורבות וערבות הדדית
+                    &#x2714;מיפוי מצב מספר תלמידים שסיימו , תלמידים שלא השלימו חובותיהם
+                    &#x2714;הכנת תיקי תלמיד
+
+                </div>
+            </li>
+            <li style="--accent-color:#E24A68">
+                <div class="date">אוקטובר</div>
+                <div class="descr">&#x2714; סוף אוקטובר/נובמבר יריד בחירת מקומות ההתנסות - מומלץ להיעזר בממ"צים של שכבה
+                    י"א.
+                    &#x2714; הורדת אפליקציית טריביו על ידי התלמידים (שכבה י')
+                    &#x2714; הצטרפות ובחירת מקום התנסות על ידי התלמידים <b><u>(כל השכבות!!!)</u></b>
+                    &#x2714; בחירת ממ"צים מכל כיתה (בשיתוף המחנכים - מידע בתיק ממ"צ בראש העמוד)
+                    &#x2714; מפגש ממ"צים ראשון - ומכאן מתחילה סדירות של מפגשים וליווי עד סוף שנה
+                </div>
+            </li>
+            <li style="--accent-color:#1B5F8C">
+                <div class="date">נובמבר</div>
+                <div class="descr">
+                    &#x2714; תוכנית עבודה מבוססת נתונים - מיפוי נתוני סטטוס בכל השכבות.
+                    &#x2714; מעקב אחר הצטרפות תלמידים למקומות ההתנסות.
+                    &#x2714; אחת לחודש להוציא דוחות עדכניים של הטריביו ולעקוב אחר שעות מדווחות של התלמידים שכולן שעות
+                    מאושרות
+                    &#x2714; שילוב מעורבות בתחומי הדעת - רכז פדגוגי
+                    &#x2714; הנחייה וביצוע מערכי שיעור בנושאים הרלוונטיים - התחלת תהליכי איתור צרכים ועידוד ליזמות
+                    חברתית.
+                    &#x2714; ועדה בית ספרית - איתור ומילוי המלצה על תלמיד י"ב מצטיין מחוזי על שם אלעד ריבן ז"ל (מילוי
+                    הטופס שישלח על ידי מפקחת רשותית)
 
 
-</div>
-</li>
-<li style="--accent-color:#6C5241">
-<div class="date">ינואר</div>
-<div class="descr">
-    &#x2714;  לקראת סיום מחצית א' - יום הורים - מתן מידע לגבי פעילות בנם /בתם במקומות ההתנסות וביזמות החברתית ושיח רפלקטיבי
-    &#x2714; בדיקת שעות מדווחות - לבדוק שכל השעות של התלמיד מאושרות במידה ויש בעיה חובה לפנות למנהל/ת ההתנדבות ברשות/מקום ההתנסות. 
-    &#x2714; החתמה על מכתב הורים (דוגמה בתיק רכז) ע"י המחנך *במידה והתלמיד משנה את מקום ההתנסות יש לוודא החתמה בשנית - יישמר בתיק התלמיד.
-    &#x2714; לוודא <b><u>בתעודות</u> ישנו מקצוע מעורבות חברתית והיגדים - חובה</b> *דוגמות להיגדים בתיק הרכז 
+                </div>
+            </li>
+            <li style="--accent-color:#4CADAD">
+                <div class="date">דצמבר</div>
+                <div class="descr">
+                    &#x2714; מילוי סטטוס מטה: לוודא שהמנהל/ת רואים את הנתונים טרם שליחתם
+                    &#x2714; לוודא שכל התלמידים מחוברים לאפליקציית הטריביו
+                    &#x2714; מערכי שיעור בנושא זיהוי כוחות - כיצד יכולות באות לידי ביטוי בפעילות במקום ההתנסות, יוזמות
+                    חברתיות - תהליך חקר, מיפוי צרכים, העלאת פתרונות
+                    &#x2714; מעקב אחר תלמידים - דרך הטריביו - לוודא שכל השעות המדווחות על ידי התלמידים מאושרות ע"י מנהל
+                    מקום ההתנסות.
+                    &#x2714; פרסום העשייה החברתית בבית הספר.
+                    &#x2714; איתור יוזמה מצטיינת לתחרות המחוזית - בתיאום מפקחת רשותית ומנהל התנדבות רשותי.
+
+
+                </div>
+            </li>
+            <li style="--accent-color:#6C5241">
+                <div class="date">ינואר</div>
+                <div class="descr">
+                    &#x2714; לקראת סיום מחצית א' - יום הורים - מתן מידע לגבי פעילות בנם /בתם במקומות ההתנסות וביזמות
+                    החברתית ושיח רפלקטיבי
+                    &#x2714; בדיקת שעות מדווחות - לבדוק שכל השעות של התלמיד מאושרות במידה ויש בעיה חובה לפנות למנהל/ת
+                    ההתנדבות ברשות/מקום ההתנסות.
+                    &#x2714; החתמה על מכתב הורים (דוגמה בתיק רכז) ע"י המחנך *במידה והתלמיד משנה את מקום ההתנסות יש לוודא
+                    החתמה בשנית - יישמר בתיק התלמיד.
+                    &#x2714; לוודא <b><u>בתעודות</u> ישנו מקצוע מעורבות חברתית והיגדים - חובה</b> *דוגמות להיגדים בתיק
+                    הרכז
 
 
 
-</div>
-</li>
-<li style="--accent-color:#2ba0f9">
-<div class="date">פברואר</div>
-<div class="descr">
-    &#x2714; בדיקת והכנת תיקי תלמיד 
-    &#x2714; פרסום העשייה החברתית בבית הספר
-    &#x2714; ליוי מעקב והעמקת תהליכי היזמות 
-    &#x2714; רענון מיום החשיפה לתוכנית וכניסה למסלול הצטיינות חברתית - תלמידי י"א
-    &#x2714; שילוב והעצמת תלמידים מארגוני החירום בשבוע החירום הארצי 22-26/2 - בשילוב רכז בטחון
-</div>
-</li>
-<li style="--accent-color:#00ad13">
-<div class="date">מרץ</div>
-<div class="descr">
-    &#x2714; הערכות ליום מעשים טובים כיום שיא בתהליכי היזמות (10/3/26)
-    &#x2714; בדיקת אישור שעות ההתנסות לתלמידים בטריביו
-    &#x2714; פרסום העשייה החברתית בבית הספר
-    &#x2714; טקס הוקרה מחוזי לבני ובנות נוער המצטיינים בהתנדבות, יזמות ותרומה לקהילה לשנת תשפ"ו - בוגרי י"ב - 15/3/26 
-    &#x2714; הנחיית הצוותים והובלת תהליכי רפלקציה 
+                </div>
+            </li>
+            <li style="--accent-color:#2ba0f9">
+                <div class="date">פברואר</div>
+                <div class="descr">
+                    &#x2714; בדיקת והכנת תיקי תלמיד
+                    &#x2714; פרסום העשייה החברתית בבית הספר
+                    &#x2714; ליוי מעקב והעמקת תהליכי היזמות
+                    &#x2714; רענון מיום החשיפה לתוכנית וכניסה למסלול הצטיינות חברתית - תלמידי י"א
+                    &#x2714; שילוב והעצמת תלמידים מארגוני החירום בשבוע החירום הארצי 22-26/2 - בשילוב רכז בטחון
+                </div>
+            </li>
+            <li style="--accent-color:#00ad13">
+                <div class="date">מרץ</div>
+                <div class="descr">
+                    &#x2714; הערכות ליום מעשים טובים כיום שיא בתהליכי היזמות (10/3/26)
+                    &#x2714; בדיקת אישור שעות ההתנסות לתלמידים בטריביו
+                    &#x2714; פרסום העשייה החברתית בבית הספר
+                    &#x2714; טקס הוקרה מחוזי לבני ובנות נוער המצטיינים בהתנדבות, יזמות ותרומה לקהילה לשנת תשפ"ו - בוגרי
+                    י"ב - 15/3/26
+                    &#x2714; הנחיית הצוותים והובלת תהליכי רפלקציה
 
-</div>
-</li>
-<li style="--accent-color:#b324b2">
-<div class="date">אפריל</div>
-<div class="descr">
-    &#x2714;  לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו - ישיבות מועצה פדגוגית
-    &#x2714;איסוף הערכת איש קשר/תלמיד לקראת מתן ציון. יתויק בתיק התלמיד (ראה הערכות לסוף שנה - חודש מאי-יוני)
-    &#x2714; בדיקת אישור שעות ההתנסות לתלמידים בטריביו, איסוף נתונים והערכות לקראת סטטוס סוף שנה
-    &#x2714; פרסום העשייה החברתית בבית הספר
-    &#x2714; בדיקת תיקי התלמיד לכל שנה י'- י"ב: חתימת הורים על מקום ההתנסות, הערכות התלמיד (ממקום ההתנסות, מחנך, התלמיד) רפלקציה, סיכומי ועדת פטור – לוודא שמירת כל המסמכים בתיק התלמיד!
+                </div>
+            </li>
+            <li style="--accent-color:#b324b2">
+                <div class="date">אפריל</div>
+                <div class="descr">
+                    &#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו - ישיבות מועצה פדגוגית
+                    &#x2714;איסוף הערכת איש קשר/תלמיד לקראת מתן ציון. יתויק בתיק התלמיד (ראה הערכות לסוף שנה - חודש
+                    מאי-יוני)
+                    &#x2714; בדיקת אישור שעות ההתנסות לתלמידים בטריביו, איסוף נתונים והערכות לקראת סטטוס סוף שנה
+                    &#x2714; פרסום העשייה החברתית בבית הספר
+                    &#x2714; בדיקת תיקי התלמיד לכל שנה י'- י"ב: חתימת הורים על מקום ההתנסות, הערכות התלמיד (ממקום
+                    ההתנסות, מחנך, התלמיד) רפלקציה, סיכומי ועדת פטור – לוודא שמירת כל המסמכים בתיק התלמיד!
 
-</li>
+            </li>
 
-<li style="--accent-color:#2596be">
-    <div class="date">מאי-יוני<br><b style="font-weight: 400; font-size: 75%;">הערכת התלמיד/ה והיערכות לסוף שנה</b></div>
-    <div style="direction: rtl; text-align: right; margin-top: 50px;">
-    
-    
-    <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'London')">שכבה ט'</button>
-        <button class="tablinks" onclick="openCity(event, 'Paris')">שכבה י'-י"א</button>
-        <button class="tablinks" onclick="openCity(event, 'Tokyo')">שכבה י"ב</button>
-      </div>
-      
-      <div id="London" class="tabcontent">
-        <h3>שכבה ט'</h3>
-       <p>הכנה לתוכנית לקראת כיתה י' (מתוך המאגרים והפעילויות בתחילת הדף). בירור ערכי, איתור חוזקות וסיוע בבחירת מקום התנסות לקראת שנה הבאה
-        דוגמא 1 לשאלון מיפוי חוזקות וכישורים <a href="https://forms.gle/CsncDvvtGmcsANta9">https://forms.gle/egFfBhxQJvJSAS3x8</a>
-        דוגמא 2 לשאלון מיפוי חוזקות וכישורים <a href="https://forms.gle/CsncDvvtGmcsANta9">https://docs.google.com/forms/d/11SYoQrQqcVcJR1mjtdeYGuqd2epsEyf2kgpzCuTc0gQ/edit</a>
-     
-        &#x2714; הסבר על תפקיד הממ"צ – מוביל מעורבות צעיר.
-        <a href="https://drive.google.com/file/d/1WVQQwtOURgh1YvELItw1kdJjbwp0CWwj/view?usp=sharing">תיק ממ"צ</a> להובלת מנהיגות הנוער בתחום המעורבות החברתית (כולל רציונאל, מערכי שיעור, טפסים ועוד)
+            <li style="--accent-color:#2596be">
+                <div class="date">מאי-יוני<br><b style="font-weight: 400; font-size: 75%;">הערכת התלמיד/ה והיערכות לסוף
+                        שנה</b></div>
+                <div style="direction: rtl; text-align: right; margin-top: 50px;">
 
-        &#x2714; מפגש עם תלמידים מצטיינים משכבה בוגרת וממ"צים מהתיכון.
-        &#x2714; סיכום תהליכי יזמות, פרסום העשייה הבית ספרית, הגשת יוזמות תלמידים להצטיינות  
-        * המלצה: הורדת אפליקציית הטריביו ובדיקת סיסמה ושם משתמש (סרטון הדרכה - בתחילת הצ'ק ליסט)
-        &#x2714; אירוע מסכם בבית הספר וחשיפה לתלמידי ח' לקראת שנה הבאה.
-        &#x2714; חפיפה עם רכז/ת מעורבות בשכבה י' לשימור וחיזוק קבוצת התלמידים המובילים בתחום (יזמים/ממ"צים ועוד)
-        &#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו – ישיבות מועצה פדגוגית.
-        &#x2714;לוודא כי המקצוע "התפתחות אישית ומעורבות חברתית" מופיע בתעודה - היגדים מומלצים *בתיק רכז בתחילת הצ'ק ליסט 
-        &#x2714; הוקרה וטקסי מצטיינים, הפקת לקחים, סיכום עם הצוות החינוכי
-</p>
-      </div>
-      
-      <div id="Paris" class="tabcontent">
-        <h3>שכבה י' - י"א</h3>
-        <p>
-&#x2714; איסוף נתונים ל<a href="https://docs.google.com/presentation/d/1HjXLF_akk8vA5KMBSc1c6W5OtBeM5qOT/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הערכת התלמיד</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/תלמיד.ה) *בתיק רכז
-&#x2714; בדיקה ואישור שעות בטריביו 
-*שעות שלא יאושרו יימחקו אוטומטית בסוף השנה.
-&#x2714; סיכום תהליכי יזמות, פרסום העשייה הבית ספרית, הגשת יוזמות תלמידים להצטיינות  .
-&#x2714; שכבה י' – תכנון ובניית ימי חשיפה לקראת שנה הבאה, יחד עם הממ"צים / מנהיגויות נוער.
-&#x2714; מכתבים אישיים לתלמידים שלא סיימו חובותיהם (ציון 1) *דוגמה בתיק רכז
-&#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו – ישיבות מועצה פדגוגית.
-&#x2714; לוודא כי המקצוע "התפתחות אישית ומעורבות חברתית" מופיע בתעודה - היגדים מומלצים בתיק הרכז*
-&#x2714; בדיקת תיקי התלמיד שכוללים לכל שנה: מכתב יידוע הורים, חתימת הורים על מקום ההתנסות, הערכות התלמיד (מאיש הקשר, מחנך, התלמיד) עבודת רפלקציה, סיכום ועדת פטור – לוודא שמירת כל המסמכים בתיק התלמיד 7 שנים מיום סיום לימודיו!
-&#x2714; סיכום ותהליכי פרידה ממקומות ההתנסות.
-&#x2714; הפקת לקחים וחשיבה על הטמעת התוכנית בתחומי דעת נוספים.
-&#x2714;  הערכת מקומות ההתנסות - לבחון ולהחליט האם מקומות ההתנסות מתאימים ורלוונטיים לשנה הבאה (האם הפעילות ערכית ומשמעותית? איש קשר מלווה? מידת שיתוף הפעולה בכתיבת הערכת התלמיד וכו').
-&#x2714; עידוד להצטיינות לצד איתור מצטיינים משכבה י"א ועידוד ליזמות. 
-&#x2714; הערכות לקראת שנה הבאה באיתור המועמדים להצטיינות ע"ש אלעד ריבן ז"ל וראש העיר (באוקטובר/נובמבר 2026 תתבקשו להעביר המלצות עבור תלמידי י"ב).
-&#x2714; הוקרה במסגרת בית הספר לצוותים שהובילו ובלטו בהובלת יוזמות, שילוב בתחומי הדעת ועוד במסגרת התוכנית. 
-            </p> 
-      </div>
-      
-      <div id="Tokyo" class="tabcontent">
-        <h3>שכבה י"ב</h3>
-        <p> 
-&#x2714; ביצוע תהליכי רפלקציה - 
-עבודת סיכום רפלקטיבית המתארת את ההתנסות לאורך 3 השנים (בהיקף של לפחות 2 עמודים. במסלול הצטיינות לפחות 5 עמודים).
 
-&#x2714; איסוף נתונים ל<a href="https://docs.google.com/presentation/d/1HjXLF_akk8vA5KMBSc1c6W5OtBeM5qOT/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הערכת התלמיד</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/התלמיד.ה) לכל שנה *בתיק רכז
-&#x2714; בדיקה ואישור שעות בטריביו *שעות שלא יאושרו יימחקו אוטומטית בסוף השנה
-*טבלת שעות לי"ב (בתיק רכז ובמצגת הערכת התלמיד)
-&#x2714; סיכום תהליכי יזמות, פרסום העשייה הבית ספרית, הגשת יוזמות תלמידים להצטיינות 
-&#x2714; קיום ועדות פטור לזכאים (ללא תלות בזכאות לבגרות) – לוודא שמירת פרוטוקול בתיק התלמיד/ה מיום סיום לימודיו.
-&#x2714; מכתבים אישיים לתלמידים שלא סיימו חובותיהם (ציון 1) *בתיק רכז
-&#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו – ישיבות מועצה פדגוגית.
-&#x2714; לוודא כי המקצוע "התפתחות אישית ומעורבות חברתית" מופיע בתעודה - היגדים מומלצים *בתיק הרכז	
-&#x2714; הפקת דו"ח שעות טריביו (ושמירתו) - חשוב! 
-&#x2714; בדיקת תיקי התלמיד שכוללים לכל שנה: חתימת הורים על מקום ההתנסות, הערכות התלמיד (ממקום ההתנסות, מחנך, התלמיד) רפלקציה, סיכומי ועדת פטור – לוודא שמירת כל המסמכים בתיק התלמיד מיום סיום לימודיו!
-&#x2714; סיכום ותהליכי פרידה ממקומות ההתנסות
-&#x2714; הפקת לקחים וחשיבה על הטמעת התוכנית בתחומי דעת נוספים.
-&#x2714; לבחון ולהחליט האם מקומות ההתנסות מתאימים ורלוונטיים לשנה הבאה (האם הפעילות ערכית ומשמעותית? איש קשר מלווה? מידת שיתוף הפעולה בכתיבת משובים וכו')
-    
-&#x2714; הקלדת הערכות וציונים במערכת הבגרויות *סמל השאלון 86083, יש לברר מול רכז הבגרויות מועדי הזנה והנחיות
-&#x2714; <u>באחריות ביה"ס הנפקת והדפסת תעודות למצטייני התוכנית (ציון 4)</u>
+                    <div class="tab">
+                        <button class="tablinks" onclick="openCity(event, 'London')">שכבה ט'</button>
+                        <button class="tablinks" onclick="openCity(event, 'Paris')">שכבה י'-י"א</button>
+                        <button class="tablinks" onclick="openCity(event, 'Tokyo')">שכבה י"ב</button>
+                    </div>
 
-<img src="finish card.png" style="transform: scaleX(-1);">
-<a href="https://drive.google.com/file/d/1UpuwCUmPP3JAubQV_pyDQHbcUlK2PKIk/view?usp=sharing">מצגת הנפקת תעודות</a>*
-&#x2714; אירוע סיכום במעורבות חברתית – חגיגת זכאות, טקסי מצטיינים.
-&#x2714; הוקרה במסגרת בית הספר לצוותים שהובילו ובלטו בהובלת יוזמות, שילוב בתחומי הדעת ועוד במסגרת התוכנית. 
-            </p>
-      </div>
-    
+                    <div id="London" class="tabcontent">
+                        <h3>שכבה ט'</h3>
+                        <p>הכנה לתוכנית לקראת כיתה י' (מתוך המאגרים והפעילויות בתחילת הדף). בירור ערכי, איתור חוזקות
+                            וסיוע בבחירת מקום התנסות לקראת שנה הבאה
+                            דוגמא 1 לשאלון מיפוי חוזקות וכישורים <a
+                                href="https://forms.gle/CsncDvvtGmcsANta9">https://forms.gle/egFfBhxQJvJSAS3x8</a>
+                            דוגמא 2 לשאלון מיפוי חוזקות וכישורים <a
+                                href="https://forms.gle/CsncDvvtGmcsANta9">https://docs.google.com/forms/d/11SYoQrQqcVcJR1mjtdeYGuqd2epsEyf2kgpzCuTc0gQ/edit</a>
+
+                            &#x2714; הסבר על תפקיד הממ"צ – מוביל מעורבות צעיר.
+                            <a
+                                href="https://drive.google.com/file/d/1WVQQwtOURgh1YvELItw1kdJjbwp0CWwj/view?usp=sharing">תיק
+                                ממ"צ</a> להובלת מנהיגות הנוער בתחום המעורבות החברתית (כולל רציונאל, מערכי שיעור, טפסים
+                            ועוד)
+
+                            &#x2714; מפגש עם תלמידים מצטיינים משכבה בוגרת וממ"צים מהתיכון.
+                            &#x2714; סיכום תהליכי יזמות, פרסום העשייה הבית ספרית, הגשת יוזמות תלמידים להצטיינות
+                            * המלצה: הורדת אפליקציית הטריביו ובדיקת סיסמה ושם משתמש (סרטון הדרכה - בתחילת הצ'ק ליסט)
+                            &#x2714; אירוע מסכם בבית הספר וחשיפה לתלמידי ח' לקראת שנה הבאה.
+                            &#x2714; חפיפה עם רכז/ת מעורבות בשכבה י' לשימור וחיזוק קבוצת התלמידים המובילים בתחום
+                            (יזמים/ממ"צים ועוד)
+                            &#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו – ישיבות מועצה
+                            פדגוגית.
+                            &#x2714;לוודא כי המקצוע "התפתחות אישית ומעורבות חברתית" מופיע בתעודה - היגדים מומלצים *בתיק
+                            רכז בתחילת הצ'ק ליסט
+                            &#x2714; הוקרה וטקסי מצטיינים, הפקת לקחים, סיכום עם הצוות החינוכי
+                        </p>
+                    </div>
+
+                    <div id="Paris" class="tabcontent">
+                        <h3>שכבה י' - י"א</h3>
+                        <p>
+                            &#x2714; איסוף נתונים ל<a
+                                href="https://docs.google.com/presentation/d/1HjXLF_akk8vA5KMBSc1c6W5OtBeM5qOT/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הערכת
+                                התלמיד</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/תלמיד.ה) *בתיק רכז
+                            &#x2714; בדיקה ואישור שעות בטריביו
+                            *שעות שלא יאושרו יימחקו אוטומטית בסוף השנה.
+                            &#x2714; סיכום תהליכי יזמות, פרסום העשייה הבית ספרית, הגשת יוזמות תלמידים להצטיינות .
+                            &#x2714; שכבה י' – תכנון ובניית ימי חשיפה לקראת שנה הבאה, יחד עם הממ"צים / מנהיגויות נוער.
+                            &#x2714; מכתבים אישיים לתלמידים שלא סיימו חובותיהם (ציון 1) *דוגמה בתיק רכז
+                            &#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו – ישיבות מועצה
+                            פדגוגית.
+                            &#x2714; לוודא כי המקצוע "התפתחות אישית ומעורבות חברתית" מופיע בתעודה - היגדים מומלצים בתיק
+                            הרכז*
+                            &#x2714; בדיקת תיקי התלמיד שכוללים לכל שנה: מכתב יידוע הורים, חתימת הורים על מקום ההתנסות,
+                            הערכות התלמיד (מאיש הקשר, מחנך, התלמיד) עבודת רפלקציה, סיכום ועדת פטור – לוודא שמירת כל
+                            המסמכים בתיק התלמיד 7 שנים מיום סיום לימודיו!
+                            &#x2714; סיכום ותהליכי פרידה ממקומות ההתנסות.
+                            &#x2714; הפקת לקחים וחשיבה על הטמעת התוכנית בתחומי דעת נוספים.
+                            &#x2714; הערכת מקומות ההתנסות - לבחון ולהחליט האם מקומות ההתנסות מתאימים ורלוונטיים לשנה
+                            הבאה (האם הפעילות ערכית ומשמעותית? איש קשר מלווה? מידת שיתוף הפעולה בכתיבת הערכת התלמיד
+                            וכו').
+                            &#x2714; עידוד להצטיינות לצד איתור מצטיינים משכבה י"א ועידוד ליזמות.
+                            &#x2714; הערכות לקראת שנה הבאה באיתור המועמדים להצטיינות ע"ש אלעד ריבן ז"ל וראש העיר
+                            (באוקטובר/נובמבר 2026 תתבקשו להעביר המלצות עבור תלמידי י"ב).
+                            &#x2714; הוקרה במסגרת בית הספר לצוותים שהובילו ובלטו בהובלת יוזמות, שילוב בתחומי הדעת ועוד
+                            במסגרת התוכנית.
+                        </p>
+                    </div>
+
+                    <div id="Tokyo" class="tabcontent">
+                        <h3>שכבה י"ב</h3>
+                        <p>
+                            &#x2714; ביצוע תהליכי רפלקציה -
+                            עבודת סיכום רפלקטיבית המתארת את ההתנסות לאורך 3 השנים (בהיקף של לפחות 2 עמודים. במסלול
+                            הצטיינות לפחות 5 עמודים).
+
+                            &#x2714; איסוף נתונים ל<a
+                                href="https://docs.google.com/presentation/d/1HjXLF_akk8vA5KMBSc1c6W5OtBeM5qOT/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הערכת
+                                התלמיד</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/התלמיד.ה) לכל שנה *בתיק רכז
+                            &#x2714; בדיקה ואישור שעות בטריביו *שעות שלא יאושרו יימחקו אוטומטית בסוף השנה
+                            *טבלת שעות לי"ב (בתיק רכז ובמצגת הערכת התלמיד)
+                            &#x2714; סיכום תהליכי יזמות, פרסום העשייה הבית ספרית, הגשת יוזמות תלמידים להצטיינות
+                            &#x2714; קיום ועדות פטור לזכאים (ללא תלות בזכאות לבגרות) – לוודא שמירת פרוטוקול בתיק
+                            התלמיד/ה מיום סיום לימודיו.
+                            &#x2714; מכתבים אישיים לתלמידים שלא סיימו חובותיהם (ציון 1) *בתיק רכז
+                            &#x2714; לקראת סיום מחצית ב' מתן סטטוסים לכל מחנך ורכז שכבה לגבי הכיתה שלו – ישיבות מועצה
+                            פדגוגית.
+                            &#x2714; לוודא כי המקצוע "התפתחות אישית ומעורבות חברתית" מופיע בתעודה - היגדים מומלצים *בתיק
+                            הרכז
+                            &#x2714; הפקת דו"ח שעות טריביו (ושמירתו) - חשוב!
+                            &#x2714; בדיקת תיקי התלמיד שכוללים לכל שנה: חתימת הורים על מקום ההתנסות, הערכות התלמיד
+                            (ממקום ההתנסות, מחנך, התלמיד) רפלקציה, סיכומי ועדת פטור – לוודא שמירת כל המסמכים בתיק התלמיד
+                            מיום סיום לימודיו!
+                            &#x2714; סיכום ותהליכי פרידה ממקומות ההתנסות
+                            &#x2714; הפקת לקחים וחשיבה על הטמעת התוכנית בתחומי דעת נוספים.
+                            &#x2714; לבחון ולהחליט האם מקומות ההתנסות מתאימים ורלוונטיים לשנה הבאה (האם הפעילות ערכית
+                            ומשמעותית? איש קשר מלווה? מידת שיתוף הפעולה בכתיבת משובים וכו')
+
+                            &#x2714; הקלדת הערכות וציונים במערכת הבגרויות *סמל השאלון 86083, יש לברר מול רכז הבגרויות
+                            מועדי הזנה והנחיות
+                            &#x2714; <u>באחריות ביה"ס הנפקת והדפסת תעודות למצטייני התוכנית (ציון 4)</u>
+
+                            <img src="finish card.png" style="transform: scaleX(-1);">
+                            <a
+                                href="https://drive.google.com/file/d/1UpuwCUmPP3JAubQV_pyDQHbcUlK2PKIk/view?usp=sharing">מצגת
+                                הנפקת תעודות</a>*
+                            &#x2714; אירוע סיכום במעורבות חברתית – חגיגת זכאות, טקסי מצטיינים.
+                            &#x2714; הוקרה במסגרת בית הספר לצוותים שהובילו ובלטו בהובלת יוזמות, שילוב בתחומי הדעת ועוד
+                            במסגרת התוכנית.
+                        </p>
+                    </div>
+
+                </div>
+            </li>
+            <li style="--accent-color:#ffef16">
+                <div class="date">רפלקציה</div>
+                <div class="descr">
+                    <div style="direction: rtl; text-align: right; margin-top: 50px;">
+                        <div class="tab">
+                            <button class="tablinks" onclick="openCity(event, 'New York')">רציונאל</button>
+                            <button class="tablinks" onclick="openCity(event, 'Nepal')">כלים ורעיונות</button>
+                            <button class="tablinks" onclick="openCity(event, 'Spain')">מחוון לרפלקציה</button>
+                        </div>
+
+                        <div id="New York" class="tabcontent">
+                            <h3>רפלקציה לשם מה?</h3>
+                            </p>
+                        </div>
+
+                        <div id="Nepal" class="tabcontent">
+                            <h3>שכבה י' - י"א</h3>
+                            <p>
+                                &#x2714; <a
+                                    href="https://drive.google.com/file/d/1SbXRJVwf_qFgERfv4y4D7MCNTU4vSthf/view?usp=sharing">מחוון
+                                    לבדיקת רפלקציה</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/תלמיד.ה) *בתיק רכז
+                            </p>
+                        </div>
+
+                        <div id="Spain" class="tabcontent">
+                            <h3>מחוון לבדיקת רפלקציה</h3>
+                            <p>
+
+                                &#x2714; שקופיות 20-23 במצגת הערכת התלמיד - רפלקציה<a
+                                    href="https://docs.google.com/presentation/d/1HjXLF_akk8vA5KMBSc1c6W5OtBeM5qOT/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הערכת
+                                    התלמיד</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/התלמיד.ה) לכל שנה *בתיק רכז
+
+
+                            </p>
+                        </div>
+
+                    </div>
+
+            </li>
+        </ul>
     </div>
-    </li>
-    <li style="--accent-color:#ffef16">
-<div class="date">רפלקציה</div>
-<div class="descr">
-    <div style="direction: rtl; text-align: right; margin-top: 50px;">
-        <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'New York')">רציונאל</button>
-        <button class="tablinks" onclick="openCity(event, 'Nepal')">כלים ורעיונות</button>
-        <button class="tablinks" onclick="openCity(event, 'Spain')">מחוון לרפלקציה</button>
-      </div>
-
-      <div id="New York" class="tabcontent">
-        <h3>רפלקציה לשם מה?</h3>
-</p>
-      </div>
-      
-      <div id="Nepal" class="tabcontent">
-        <h3>שכבה י' - י"א</h3>
-        <p>
-&#x2714;   <a href="https://drive.google.com/file/d/1SbXRJVwf_qFgERfv4y4D7MCNTU4vSthf/view?usp=sharing">מחוון לבדיקת רפלקציה</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/תלמיד.ה) *בתיק רכז
-            </p> 
-      </div>
-      
-      <div id="Spain" class="tabcontent">
-        <h3>מחוון לבדיקת רפלקציה</h3>
-        <p> 
-
-&#x2714; שקופיות 20-23 במצגת הערכת התלמיד - רפלקציה<a href="https://docs.google.com/presentation/d/1HjXLF_akk8vA5KMBSc1c6W5OtBeM5qOT/edit?usp=sharing&ouid=118135712597895605881&rtpof=true&sd=true">הערכת התלמיד</a> (רפלקציה ו־3 שאלוני הערכה: ממקום ההתנסות/מחנך/התלמיד.ה) לכל שנה *בתיק רכז
-      
-
-            </p>
-      </div>
-
-      </div>
-
-</li>
-</ul>
-</div> 
-<footer style="height: 200px; background: #eee; font-size: 200%; border-top: 2px rgb(109, 109, 109) solid; white-space: pre-wrap; text-align: center; position: relative; bottom: -40px;" dir="rtl"><i style="font-size: 40px;">"החינוך הוא מה שנשאר, 
-כאשר שוכחים את כל הדברים שלמדנו בבית־הספר."</i>
-<b style="text-align: left;">- אלברט איינשטיין</b>
-</footer>
-<script>
+    <footer
+        style="height: 200px; background: #eee; font-size: 200%; border-top: 2px rgb(109, 109, 109) solid; white-space: pre-wrap; text-align: center; position: relative; bottom: -40px;"
+        dir="rtl"><i style="font-size: 40px;">"החינוך הוא מה שנשאר,
+            כאשר שוכחים את כל הדברים שלמדנו בבית־הספר."</i>
+        <b style="text-align: left;">- אלברט איינשטיין</b>
+    </footer>
+    <script>
         let opened = "";
-      function openCity(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            if (opened == cityName) return;
+            document.getElementById(cityName).style.display = "flex";
+            evt.currentTarget.className += " active";
+            opened = cityName;
         }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        if (opened == cityName) return;
-        document.getElementById(cityName).style.display = "flex";
-        evt.currentTarget.className += " active";
-        opened = cityName;
-      }
-      </script>
-</body></html>
+    </script>
+</body>
+
+</html>
