@@ -298,6 +298,157 @@
                 max-height: 15vh;
                 width: auto;
             }
+
+            /* ===== visual polish additions ===== */
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            h1 {
+                background: linear-gradient(90deg, #068a29, #2596be, #9234eb);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                letter-spacing: -0.01em;
+            }
+
+            h2 {
+                color: rgba(30, 30, 30, 0.75);
+                font-weight: 500;
+            }
+
+            /* intro card */
+            h4 {
+                background: #ffffff;
+                border-radius: 1.25rem;
+                padding: 1.75rem 2rem;
+                box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.06);
+                line-height: 1.6;
+            }
+
+            h4 a {
+                color: #2596be;
+                font-weight: 500;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(37, 150, 190, 0.4);
+                transition: border-color 0.2s;
+            }
+
+            h4 a:hover {
+                border-color: #2596be;
+            }
+
+            /* card hover lift */
+            ul li .title,
+            ul li .descr {
+                border-radius: 0.75rem;
+                transition: box-shadow 0.25s ease, transform 0.25s ease;
+            }
+
+            ul li:hover .title,
+            ul li:hover .descr {
+                box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.08);
+                transform: translateY(-0.15rem);
+            }
+
+            ul li .date {
+                box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+            }
+
+            ul li .descr a {
+                color: inherit;
+                text-decoration: underline;
+                text-decoration-color: rgba(30, 30, 30, 0.3);
+                text-underline-offset: 2px;
+            }
+
+            ul li .descr a:hover {
+                text-decoration-color: currentColor;
+            }
+
+            /* nicer tabs */
+            .tab {
+                border-radius: 0.75rem;
+                gap: 0.5rem;
+                padding: 0.4rem;
+                border: none;
+                background-color: #eef0f4;
+            }
+
+            .tab button {
+                border-radius: 0.5rem;
+                box-shadow: none;
+                margin: 0;
+            }
+
+            .tab button.active {
+                box-shadow: 0 0.25rem 0.75rem rgba(146, 52, 235, 0.35);
+            }
+
+            .tabcontent {
+                border: none;
+                border-radius: 0 0 0.75rem 0.75rem;
+                background: #fafafa;
+                padding: 1.25rem 1.5rem;
+            }
+
+            /* subject-integration grid */
+            .subjects-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+                gap: 1.25rem;
+                margin-top: 0.5rem;
+                direction: rtl;
+            }
+
+            .subject-card {
+                background: #ffffff;
+                border-radius: 1rem;
+                padding: 1.25rem 1.5rem;
+                border-top: 0.35rem solid var(--subject-color, #9234eb);
+                box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.07);
+                transition: box-shadow 0.25s ease, transform 0.25s ease;
+            }
+
+            .subject-card:hover {
+                box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+                transform: translateY(-0.2rem);
+            }
+
+            .subject-card h3 {
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-bottom: 0.6rem;
+                color: var(--subject-color, #9234eb);
+            }
+
+            .subject-card .subject-content {
+                font-size: 0.95rem;
+                font-weight: 300;
+                line-height: 1.6;
+                min-height: 3rem;
+            }
+
+            .subject-card .placeholder {
+                color: rgba(30, 30, 30, 0.4);
+                font-style: italic;
+            }
+
+            .subject-card.add-new {
+                border: 0.15rem dashed rgba(30, 30, 30, 0.25);
+                border-top: 0.15rem dashed rgba(30, 30, 30, 0.25);
+                background: transparent;
+                box-shadow: none;
+                display: grid;
+                place-content: center;
+                text-align: center;
+                color: rgba(30, 30, 30, 0.4);
+            }
+
+            .subject-card.add-new h3 {
+                color: rgba(30, 30, 30, 0.4);
+            }
         </style>
     </head>
 
@@ -610,6 +761,90 @@
       </div>
 
 </li>
+
+<li style="--accent-color:#9234eb">
+<div class="date">שילוב בתחומי הדעת</div>
+<div class="descr">
+    <p style="margin-bottom: 1rem;">
+    מרחב לאיסוף רעיונות, מערכי שיעור וחומרים לשילוב תוכנית המעורבות החברתית בתחומי הדעת השונים. ניתן להוסיף לכל תחום דעת קישורים, מסמכים או תיאור קצר של הפעילות.
+    <br>* להוספת תחום דעת נוסף: יש להעתיק את מבנה ה־<span dir="ltr" style="font-family: monospace;">subject-card</span> (בתוך קוד העמוד) ולהדביק תחת אחד הקיימים, לשנות את השם ואת הצבע (<span dir="ltr" style="font-family: monospace;">--subject-color</span>) ולהחליף את הטקסט המצוין כ"טרם נוספו חומרים".
+    </p>
+
+    <div class="subjects-grid">
+
+        <div class="subject-card" style="--subject-color:#068a29">
+            <h3>מתמטיקה</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#2596be">
+            <h3>לשון וספרות</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#E24A68">
+            <h3>אנגלית</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#FBCA3E">
+            <h3>היסטוריה ואזרחות</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#4CADAD">
+            <h3>מדעים</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#b324b2">
+            <h3>תנ"ך ומחשבת ישראל</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#6C5241">
+            <h3>גיאוגרפיה</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#ff8c42">
+            <h3>אמנות ומוזיקה</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#1B5F8C">
+            <h3>חינוך גופני</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+
+        <div class="subject-card" style="--subject-color:#00ad13">
+            <h3>מגמות טכנולוגיות</h3>
+            <div class="subject-content">
+                <p class="placeholder">טרם נוספו חומרים...</p>
+            </div>
+        </div>
+    </div>
+</div>
+</li>
+
 </ul>
 </div> 
 <footer style="height: 200px; background: #eee; font-size: 200%; border-top: 2px rgb(109, 109, 109) solid; white-space: pre-wrap; text-align: center; position: relative; bottom: -40px;" dir="rtl"><i style="font-size: 40px;">"החינוך הוא מה שנשאר, 
